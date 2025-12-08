@@ -1,0 +1,14 @@
+apiVersion: 
+kind: PersistentVolume
+metadata:
+  name: pv-demo
+spec:
+  accessModes:
+  - ReadWriteOnce
+  PersistentVolumeReclaimPolicy: Retain 
+  capacity:
+    storage: 15Gi
+  csi: 
+    driver: ebs.csi.aws.com
+    fstype: 
+
