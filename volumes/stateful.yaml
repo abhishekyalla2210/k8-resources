@@ -23,7 +23,7 @@ spec:
 
 --- 
 apiVersion: v1 
-kind: Stateful
+kind: StatefulSet
 metadata: 
   name: nginx
 spec:
