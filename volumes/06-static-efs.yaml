@@ -7,7 +7,7 @@ spec:
   - ReadWriteOnce
   capacity:
     storage: 20Gi
-  persistentVolumeClaim: Retain
+  persistentVolumeReclaimPolicy: Retain
   volumeMode: Filesystem
   storageClassName: "" # should be empty in static
   csi:
@@ -24,8 +24,7 @@ spec:
    - ReadWriteOnce
   storageClassName: "" 
   resources:
-    capacity:
-      requests:
+    requests:
         storage: 10Gi
 
 ---
