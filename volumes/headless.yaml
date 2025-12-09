@@ -1,0 +1,45 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: headless 
+  namespace: roboshop
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+     purpose: headless 
+  template:
+    metadata:
+      labels:
+        purpose: headless 
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+
+---
+apiVersion: v1 
+kind: Service
+metadata:
+  name: pv-demo
+  namespace: roboshop
+spec:
+  selector:
+    purpose: headless 
+  ports:
+    - port: 80
+      targetPort: 80
+
+---
+apiVersion: v1 
+kind: Service
+metadata:
+  name: head-demo
+  namespace: roboshop
+spec:
+  clusterIP: None
+  selector:
+    purpose: headless 
+  ports:
+    - port: 80
+      targetPort: 80
