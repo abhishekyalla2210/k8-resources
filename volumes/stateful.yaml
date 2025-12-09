@@ -1,0 +1,53 @@
+apiVersion: v1 
+kind: Service
+metadata:
+  name: nginx
+  labels:
+    purpose: statedul-demo
+spec:
+  selector:
+    purpose: statedul-demo
+  clusterIP: None
+  ports:  
+    - port: 80
+---
+apiVersion: v1 
+kind: Service
+metadata:
+  name: pv-demo
+spec:
+  selector:
+    purpose: statedul-demo
+  ports:
+    - port: 80
+
+--- 
+apiVersion: v1 
+kind: Stateful
+metadata: 
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      purpose: statedul-demo
+  template:
+    metadata: 
+      labels:
+        purpose: statedul-demo
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+          ports:
+            - containerPort: 80
+volumeClaimTemplates:
+- metadata:
+  name: efs-dynamic
+  spec:
+   accessModes:
+    - ReadWriteMany
+  storageClassName: roboshop-efs
+  resources:
+    requests:
+      storage: 1Gi
