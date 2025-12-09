@@ -1,14 +1,13 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name:  demo 
+  name: demo 
   namespace: roboshop
 spec:
   replicas: 4
   selector:
     matchLabels:
-      
-          purpose: checking the pv 
+     purpose: checking the pv 
   template:
     metadata:
       labels:
