@@ -1,0 +1,33 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name:  demo 
+  namespace: roboshop
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      
+          purpose: checking the pv 
+  template:
+    metadata:
+      labels:
+        purpose: checking the pv 
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+
+---
+apiVersion: v1 
+kind: Service
+metadata:
+  name: pv-demo
+  namespace: roboshop
+spec:
+  selector:
+    purpose: checking the pv 
+  ports:
+    - port: 80
+      targetPort: 80
+
