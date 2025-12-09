@@ -12,7 +12,7 @@ spec:
   storageClassName: "" # should be empty in static
   csi:
     driver: efs.csi.aws.com
-    volumeHandle: fs-036d23e179ae44563
+    volumeHandle: fs-05f9111824e6f14b2
  
 ---
 apiVersion: v1 
@@ -43,7 +43,7 @@ spec:
         - name: vol-efs
           mountPath: /usr/share/nginx/html
   nodeSelector:
-    topology.kubernetes.io/zone: us-east-1c
+    topology.kubernetes.io/zone: us-east-1f
   volumes:
   - name: vol-efs
     persistentVolumeClaim:
