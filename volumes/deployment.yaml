@@ -7,11 +7,11 @@ spec:
   replicas: 4
   selector:
     matchLabels:
-     purpose: checking the pv 
+     purpose: checking 
   template:
     metadata:
       labels:
-        purpose: checking the pv 
+        purpose: checking 
     spec:
       containers:
         - name: nginx
@@ -25,7 +25,7 @@ metadata:
   namespace: roboshop
 spec:
   selector:
-    purpose: checking the pv 
+    purpose: checking 
   ports:
     - port: 80
       targetPort: 80
