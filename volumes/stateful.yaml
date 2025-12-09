@@ -43,11 +43,11 @@ spec:
             - containerPort: 80
 volumeClaimTemplates:
 - metadata:
-  name: efs-dynamic
+  name: demo
   spec:
    accessModes:
     - ReadWriteMany
-  storageClassName: roboshop-efs
+  storageClassName: roboshop-ebs
   resources:
     requests:
       storage: 1Gi
