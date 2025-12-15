@@ -39,7 +39,7 @@ spec:
     matchLabels:
       app: nginx
       purpose: stateful-demo # has to match .spec.template.metadata.labels
-  serviceName: "nginx-headless" # this should be head less service name
+  servic0eName: "nginx-headless" # this should be head less service name
   replicas: 3 # by default is 1
   template:
     metadata:
