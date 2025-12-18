@@ -1,26 +1,26 @@
-apiVersion: apps/v1 
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: node-affinity
 spec:
   replicas: 1
   selector:
-   matchLabels:
-      app: affinity 
+    matchLabels:
+      app: affinity
   template:
-    metadata: 
-      labels: 
+    metadata:
+      labels:
         app: affinity
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoreDuringExecution:
-          nodeSelector:
-          - matchExpressions:
-            - key: topology.kubernetes.io/zone
-              operator: In
-              values:
-                - us-east-1b
-    spec: 
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoreDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: topology.kubernetes.io/zone
+                    operator: In
+                    values:
+                      - us-east-1b
       containers:
         - name: nginx
           image: nginx
