@@ -1,26 +1,39 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: node-affinity
+  name: nginx
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: affinity
-  template:
-    metadata:
-      labels:
-        app: affinity
-    spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoreDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                  - key: topology.kubernetes.io/zone
-                    operator: In
-                    values:
-                      - us-east-1b
-      containers:
-        - name: nginx
-          image: nginx
+  affinity:
+    nodeAffinity:
+      # hard rule
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.kubernetes.io/zone
+            operator: In
+            values:
+            - us-east-1b
+          # - key: disktype
+          #   operator: In
+          #   values:
+          #   - ssd
+      # soft rule
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+          - key: project
+            operator: In
+            values:
+            - roboshop
+      - weight: 10
+        preference:
+          matchExpressions:
+          - key: project
+            operator: In
+            values:
+            - amazon
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: Always
